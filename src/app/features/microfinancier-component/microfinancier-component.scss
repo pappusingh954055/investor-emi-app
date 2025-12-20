@@ -1,0 +1,52 @@
+.page-card {
+  margin-bottom: 16px;
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+.form-actions {
+  grid-column: span 2;
+  display: flex;
+  gap: 10px;
+}
+
+.table-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
+.search-box {
+  width: 260px;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  font-weight: 600;
+}
+
+mat-form-field {
+  font-size: 13px;
+}
+.table-wrapper {
+  max-height: 350px;
+  /* adjust height you want */
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 4px;
+  /* avoid scrollbar overlap */
+  border-radius: 8px;
+}

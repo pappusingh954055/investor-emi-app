@@ -1,0 +1,323 @@
+// /* Global card padding & rounded corners */
+// mat-card {
+//   margin-bottom: 16px;
+//   border-radius: 12px !important;
+//   padding: 10px 16px !important;
+// }
+
+// /* Section headings spacing */
+// mat-card-title {
+//   padding-bottom: 6px;
+//   font-weight: 600;
+//   font-size: 16px;
+// }
+
+// /* Select dropdown full width */
+// .full-width {
+//   width: 100%;
+//   margin-top: 6px;
+// }
+
+// /* Remove large empty space between controls */
+// mat-form-field.full-width {
+//   margin-bottom: -4px;
+// }
+
+// /* EMI table spacing */
+// table {
+//   width: 100%;
+//   margin-top: 10px;
+//   border-radius: 10px !important;
+// }
+
+// /* Tab content padding fix */
+// mat-tab-group {
+//   margin-top: -8px;
+// }
+
+// /* Reduce extra blank space above EMI Schedule */
+// .schedule-card {
+//   padding-top: 4px !important;
+// }
+
+// /* Improve tab UI */
+// mat-tab-header {
+//   margin-bottom: 8px;
+// }
+
+// /* Responsive fix */
+// @media (max-width: 768px) {
+//   mat-card {
+//     padding: 10px 10px !important;
+//   }
+// }
+// .export-area {
+//   margin: 6px 0 10px;
+//   display: flex;
+//   gap: 10px;
+// }
+
+
+
+/* Global card padding & rounded corners */
+/* Global card padding & rounded corners */
+mat-card {
+  margin-bottom: 16px;
+  border-radius: 12px !important;
+  padding: 10px 16px !important;
+}
+
+/* Section headings spacing */
+mat-card-title {
+  padding-bottom: 6px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* Select dropdown full width */
+.full-width {
+  width: 100%;
+  margin-top: 6px;
+}
+
+/* Remove large empty space between controls */
+mat-form-field.full-width {
+  margin-bottom: -4px;
+}
+
+/* ========================================= */
+/*     EMI SCHEDULE TABLE – FINAL FIX        */
+/* ========================================= */
+
+table.mat-table {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 10px !important;
+  table-layout: fixed !important; /* 🔥 Prevents stretching */
+}
+
+/* Fix each column width */
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  padding: 6px 10px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* Footer should NOT stretch */
+tr.mat-footer-row {
+  height: 36px !important;
+}
+
+/* Prevent footer expansion */
+td.mat-footer-cell {
+  padding: 0 !important;
+  text-align: right;
+}
+
+/* Wrap the totals in a safe container */
+.total-wrapper {
+  display: block;
+  width: 100%;
+  padding-right: 10px;
+  font-size: 14px !important;
+  line-height: 18px !important;
+  white-space: normal !important;
+}
+
+/* The totals block becomes two-line text */
+.total-line {
+  display: block;
+  font-weight: bold;
+}
+
+/* Prevent table from exceeding the page */
+.mat-elevation-z2 {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+/* Paginator spacing fix */
+mat-paginator {
+  margin-top: 10px !important;
+}
+
+/* ========================================= */
+/* END – TABLE FIX                           */
+/* ========================================= */
+
+/* Tab content padding fix */
+mat-tab-group {
+  margin-top: -8px;
+}
+
+/* Reduce extra blank space above EMI Schedule */
+.schedule-card {
+  padding-top: 4px !important;
+}
+
+/* Improve tab UI */
+mat-tab-header {
+  margin-bottom: 8px;
+}
+
+/* Responsive fix */
+@media (max-width: 768px) {
+  mat-card {
+    padding: 10px 10px !important;
+  }
+
+  td.mat-footer-cell {
+    font-size: 12px !important;
+  }
+}
+
+.export-area {
+  margin: 6px 0 10px;
+  display: flex;
+  gap: 10px;
+}
+
+
+
+
+/* ============================================= */
+/*   COMPACT MATERIAL TABLE – DOES NOT OVERFLOW  */
+/* ============================================= */
+
+/* Reduce table cell padding */
+.mat-mdc-table .mdc-data-table__cell,
+.mat-mdc-table .mdc-data-table__header-cell {
+  padding: 4px 10px !important;
+  height: 36px !important;
+  font-size: 13px !important;
+}
+
+/* Reduce header size */
+.mat-mdc-header-cell {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+/* Reduce row height */
+.mat-mdc-row, .mat-mdc-header-row {
+  height: 36px !important;
+}
+
+/* Reduce space above/below table */
+.emi-table {
+  margin-top: 6px !important;
+  margin-bottom: 6px !important;
+}
+
+/* Keep footer compact */
+.mat-mdc-footer-row {
+  height: 34px !important;
+}
+
+/* Ensure card never overflows screen height */
+.schedule-card {
+  max-height: calc(100vh - 180px) !important;
+  overflow: auto;
+  padding: 10px !important;
+}
+
+/* ================================ */
+/*       SCROLLABLE TABLE AREA      */
+/* ================================ */
+.table-wrapper {
+  max-height: 350px;     /* adjust height you want */
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 4px;     /* avoid scrollbar overlap */
+  border-radius: 8px;
+}
+
+/* Prevent table from stretching full viewport */
+.emi-table {
+  width: 100%;
+  table-layout: fixed !important;
+}
+
+
+
+/* =============================== */
+/* DARK LOADING OVERLAY + SPINNER */
+/* =============================== */
+.loading-overlay {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 64px);
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 5000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Search box small */
+.search-box {
+  margin-bottom: 8px;
+}
+
+.table-wrapper {
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+/* Sorting arrow fix */
+.mat-sort-header-container {
+  justify-content: space-between !important;
+}
+
+
+
+/* FULLSCREEN DARK LOADER */
+.loading-overlay {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 70px);
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 5000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Search bar spacing */
+.search-box {
+  margin-bottom: 10px;
+}
+
+/* Table Wrapper */
+.table-wrapper {
+  max-height: 350px;
+  overflow-y: auto;
+  border-radius: 8px;
+}
+
+/* Compact Table */
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  padding: 6px 10px !important;
+  font-size: 13px;
+}
+
+/* Sorting icon */
+.sort-icon {
+  margin-left: 6px;
+  font-size: 12px;
+}
+
+/* Header clickable */
+th {
+  cursor: pointer;
+}
+

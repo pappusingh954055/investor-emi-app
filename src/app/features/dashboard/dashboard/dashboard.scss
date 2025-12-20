@@ -1,0 +1,186 @@
+/* ===========================
+   🌟 GLOBAL DASHBOARD WRAPPER
+   =========================== */
+.dashboard-root {
+  padding: 20px;
+  border-radius: 20px;
+  display: block;
+  transition: background 0.3s ease, color 0.3s ease;
+  background: var(--dashboard-bg);
+  color: var(--text-color);
+}
+
+/* ===========================
+   📊 KPI GRID (4 CARDS)
+   =========================== */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+/* KPI CARD 🎯 */
+.kpi-card {
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: var(--card-bg-glass);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  color: var(--text-color);
+  border: 2px solid var(--kpi-border, transparent);
+  box-shadow: 0 10px 20px var(--shadow-color);
+  transition: 0.3s ease;
+  cursor: default;
+}
+
+.kpi-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 32px var(--shadow-color-hover);
+}
+
+/* KPI CARD LABEL & VALUE */
+.kpi-label {
+  font-size: 14px;
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+.kpi-value {
+  font-size: 26px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+/* 💡 KPI CARD COLOR VARIANTS (Border Only)
+   Accepts both `kpi-warning` and `warning` classes to keep compatibility */
+.kpi-primary, .primary { --kpi-border: var(--chart-primary); }
+.kpi-warning, .warning { --kpi-border: var(--chart-secondary); }
+.kpi-success, .success { --kpi-border: var(--chart-accent); }
+.kpi-neutral, .neutral { --kpi-border: var(--border-color); }
+
+/* ===========================
+   📈 CHART GRID CARDS
+   =========================== */
+.charts-grid {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1.4fr;
+  gap: 16px;
+}
+
+.chart-card {
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: var(--chart-card-bg);
+  color: var(--text-color);
+  box-shadow: 0 10px 24px var(--shadow-color);
+  transition: 0.3s ease;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.chart-card:hover {
+  box-shadow: 0 16px 32px var(--shadow-color-hover);
+}
+
+/* Chart Title */
+.chart-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
+
+/* Allow Donut to Grow (2-row span) */
+.chart-tall {
+  grid-row: span 2;
+}
+
+/* ===========================
+   📱 RESPONSIVE
+   =========================== */
+@media (max-width: 1024px) {
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+  .chart-tall {
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .kpi-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===========================
+   🖼 CHART CANVAS FIX
+   =========================== */
+canvas {
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100% !important;
+}
+
+/* Error */
+.dashboard-error {
+  color: var(--danger-color, #ff5252);
+  padding: 8px 0;
+}
+
+.chart-card.small {
+  height: 360px !important;
+  padding: 10px 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.chart-card.small canvas {
+  height: 240px !important;
+  width: 240px !important;
+
+  max-height: 240px !important;
+  max-width: 240px !important;
+
+  margin: auto !important;   /* center inside card */
+  display: block;
+}
+
+.chart-card.small .chart-title {
+  margin-bottom: 16px !important;  /* match other cards */
+  padding-top: 4px;                /* aligns titles perfectly */
+}
+
+.donut-wrapper {
+  height: 260px;            /* fixed space for chart */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.donut-wrapper canvas {
+  width: 240px !important;
+  height: 240px !important;
+}
+
+
+/* add to dashboard.scss */
+.donut-wrapper {
+  height: 260px;            // ensures canvas has vertical space
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+.chart-title-center {
+  text-align: center;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 15px;
+}

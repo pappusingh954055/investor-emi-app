@@ -1,0 +1,147 @@
+<mat-sidenav-container class="app-container">
+
+  <!-- ===================== SIDENAV ===================== -->
+  <mat-sidenav
+    #drawer
+    class="app-sidenav"
+    [mode]="mobileQuery.matches ? 'over' : 'side'"
+    [opened]="isMenuOpened()"
+    (openedChange)="isMenuOpened.set($event)">
+
+    <mat-toolbar class="sidenav-header">
+      📌 EMI System
+    </mat-toolbar>
+
+    <mat-accordion>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Microfinanciers</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <a mat-list-item routerLink="/microfinanciers" routerLinkActive="active">
+            All Microfinancers
+          </a>
+        </mat-nav-list>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Investors</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <a mat-list-item routerLink="/investors" routerLinkActive="active">
+            All Investors
+          </a>
+        </mat-nav-list>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Investments</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <a mat-list-item routerLink="/investor-investments" routerLinkActive="active">
+            Investor Investments
+          </a>
+        </mat-nav-list>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>EMI Calculations</mat-panel-title        >
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <a mat-list-item routerLink="/emi-schedule" routerLinkActive="active">
+            EMI Schedule
+          </a>
+        </mat-nav-list>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Reminders</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <a mat-list-item routerLink="reminders/reminders-list" routerLinkActive="active">
+            Reminders List
+          </a>
+        </mat-nav-list>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Dashboard</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
+            Overview
+          </a>
+        </mat-nav-list>
+      </mat-expansion-panel>
+
+    </mat-accordion>
+  </mat-sidenav>
+
+  <!-- ===================== MAIN CONTENT ===================== -->
+  <mat-sidenav-content class="main-wrapper">
+
+    <!-- ===================== HEADER ===================== -->
+    <mat-toolbar class="app-toolbar">
+
+      <button mat-icon-button (click)="toggleMenu()">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <span class="app-title">Investor EMI Management</span>
+      <span class="spacer"></span>
+
+      <!-- 🔔 REMINDER BELL (HIDDEN WHEN 0) -->
+      <!-- <button
+        mat-icon-button
+        *ngIf="reminderCount() > 0"
+        (click)="onBellClick()">
+
+        <mat-icon
+          matBadge="{{ reminderCount() }}"
+          matBadgeColor="warn"
+          matBadgeOverlap="false">
+          notifications
+        </mat-icon>
+      </button> -->
+
+      <button
+  mat-icon-button
+  class="bell-btn"
+  *ngIf="reminderCount() > 0"
+  (click)="onBellClick()">
+
+  <mat-icon
+    matBadge="{{ reminderCount() }}"
+    matBadgeColor="warn">
+    notifications
+  </mat-icon>
+</button>
+
+      <!-- 🌗 THEME TOGGLE -->
+      <button mat-icon-button (click)="toggleTheme()">
+        <mat-icon>
+          {{ currentTheme() === 'dark' ? 'light_mode' : 'dark_mode' }}
+        </mat-icon>
+      </button>
+
+    </mat-toolbar>
+
+    <!-- ===================== PAGE CONTENT ===================== -->
+    <div class="app-content">
+      <router-outlet></router-outlet>
+    </div>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="app-footer">
+      © {{ currentYear }} Investor EMI System | All Rights Reserved
+    </footer>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

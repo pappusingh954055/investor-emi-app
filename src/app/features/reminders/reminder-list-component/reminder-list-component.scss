@@ -1,0 +1,121 @@
+/* ===========================
+   DATE FILTER & FORM SPACING
+=========================== */
+.date-filter {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.date-filter mat-form-field {
+  flex: 1 1 200px;
+}
+
+.full-width {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* ===========================
+   STATUS + OVERDUE COLORS
+=========================== */
+.overdue {
+  background: #ffebee;
+  color: #d32f2f;
+}
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+.status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.pending {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+.paid-label {
+  color: #2e7d32;
+  font-weight: bold;
+}
+
+/* ===========================
+      SORTABLE HEADERS
+=========================== */
+.sortable {
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.arrow-up::after {
+  content: "▲";
+  color: #1976d2;
+}
+
+.arrow-down::after {
+  content: "▼";
+  color: #1976d2;
+}
+
+/* ===========================
+      LOADING OVERLAY
+=========================== */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+mat-card {
+  position: relative;
+}
+
+/* ===========================
+   COMPACT TABLE SPACING
+=========================== */
+.mat-mdc-table .mdc-data-table__cell,
+.mat-mdc-table .mdc-data-table__header-cell {
+  padding: 4px 10px !important;
+  height: 36px !important;
+  font-size: 13px !important;
+}
+
+.mat-mdc-header-cell {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+.mat-mdc-row,
+.mat-mdc-header-row {
+  height: 36px !important;
+}
+
+.mat-mdc-footer-row {
+  height: 34px !important;
+}
+
+/* ===========================
+   SCROLLABLE TABLE WRAPPER
+=========================== */
+.table-wrapper {
+  max-height: 350px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 4px;
+  border-radius: 8px;
+}

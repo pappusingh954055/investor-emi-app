@@ -1,0 +1,155 @@
+/* ---------- GLOBAL CARD STYLING ---------- */
+mat-card {
+  margin-bottom: 16px;
+  border-radius: 10px !important;
+  padding: 6px 12px;
+}
+
+/* ---------- SELECT INVESTOR SECTION ---------- */
+.full-width {
+  width: 100%;
+}
+
+mat-form-field.full-width {
+  margin-top: 6px;
+}
+
+/* ---------- ADD INVESTMENT FORM ---------- */
+.investment-form {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.investment-form mat-form-field {
+  flex: 1 1 200px;
+  min-width: 180px;
+}
+
+.add-btn {
+  align-self: center;
+  height: 56px;
+  padding: 0 18px;
+  border-radius: 30px !important;
+}
+
+/* ---------- TABLE ---------- */
+table {
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 10px !important;
+}
+
+mat-card-title {
+  padding-bottom: 4px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* ---------- SECTION SPACING FIX ---------- */
+.section {
+  margin-top: -8px; /* reduce unwanted gaps */
+}
+.type-monthly {
+  background-color: #d4f5d1;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #0b6623;
+  font-weight: 600;
+}
+
+.type-annual {
+  background-color: #d6e6ff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #004aad;
+  font-weight: 600;
+}
+
+/* ---------- Frequency Colors ---------- */
+
+.freq-daily {
+  background-color: #fff7cc;
+  color: #a87e00;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.freq-monthly {
+  background-color: #d4f5d1;
+  color: #0b6623;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.freq-yearly {
+  background-color: #d6e6ff;
+  color: #004aad;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+
+
+
+/* ============================================= */
+/*   COMPACT MATERIAL TABLE – DOES NOT OVERFLOW  */
+/* ============================================= */
+
+/* Reduce table cell padding */
+.mat-mdc-table .mdc-data-table__cell,
+.mat-mdc-table .mdc-data-table__header-cell {
+  padding: 4px 10px !important;
+  height: 36px !important;
+  font-size: 13px !important;
+}
+
+/* Reduce header size */
+.mat-mdc-header-cell {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+/* Reduce row height */
+.mat-mdc-row, .mat-mdc-header-row {
+  height: 36px !important;
+}
+
+/* Reduce space above/below table */
+.emi-table {
+  margin-top: 6px !important;
+  margin-bottom: 6px !important;
+}
+
+/* Keep footer compact */
+.mat-mdc-footer-row {
+  height: 34px !important;
+}
+
+/* Ensure card never overflows screen height */
+.schedule-card {
+  max-height: calc(100vh - 180px) !important;
+  overflow: auto;
+  padding: 10px !important;
+}
+
+/* ================================ */
+/*       SCROLLABLE TABLE AREA      */
+/* ================================ */
+.table-wrapper {
+  max-height: 350px;     /* adjust height you want */
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 4px;     /* avoid scrollbar overlap */
+  border-radius: 8px;
+}
+
+/* Prevent table from stretching full viewport */
+.emi-table {
+  width: 100%;
+  table-layout: fixed !important;
+}

@@ -64,7 +64,10 @@
               "buildTarget": "investor-emi-app:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 4300
+          }
         },
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n"
@@ -87,5 +90,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "717d86a5-dd5b-4a67-843e-6c0de0913371"
   }
 }

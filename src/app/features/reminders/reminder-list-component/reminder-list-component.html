@@ -1,0 +1,159 @@
+<mat-card>
+  <mat-card-title>Reminders - List</mat-card-title>
+
+  <form [formGroup]="form" (ngSubmit)="fetchReminders()" class="date-filter">
+
+    <mat-form-field appearance="outline">
+      <mat-label>From Date</mat-label>
+      <input matInput [matDatepicker]="fromPicker" formControlName="from" />
+      <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+      <mat-datepicker #fromPicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>To Date</mat-label>
+      <input matInput [matDatepicker]="toPicker" formControlName="to" />
+      <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+      <mat-datepicker #toPicker></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Filter</button>
+
+  </form>
+
+  <!-- 🔍 SEARCH BAR -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Search</mat-label>
+    <input matInput placeholder="Search message, micro financer, status..." (keyup)="applySearch($event)">
+  </mat-form-field>
+
+  <mat-progress-bar *ngIf="loading()" mode="indeterminate"></mat-progress-bar>
+
+  <!-- ================= SORTABLE + PAGED TABLE ================= -->
+  <div class="table-wrapper">
+    <table mat-table [dataSource]="pagedReminders" matSort class="full-width" *ngIf="!loading() && reminders().length">
+
+      <!-- ID -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef (click)="sort('id')" class="sortable">
+          ID <span [ngClass]="arrow('id')"></span>
+        </th>
+        <td mat-cell *matCellDef="let r">{{ r.id }}</td>
+      </ng-container>
+
+      <!-- DATE -->
+      <ng-container matColumnDef="reminderDate">
+        <th mat-header-cell *matHeaderCellDef (click)="sort('reminderDate')" class="sortable">
+          Date <span [ngClass]="arrow('reminderDate')"></span>
+        </th>
+        <td mat-cell *matCellDef="let r" [class.overdue]="isOverdue(r.reminderDate, r.status)">
+          {{ r.reminderDate | date:'MMM d, yyyy' }}
+        </td>
+      </ng-container>
+
+      <!-- MESSAGE -->
+      <ng-container matColumnDef="message">
+        <th mat-header-cell *matHeaderCellDef (click)="sort('message')" class="sortable">
+          Message <span [ngClass]="arrow('message')"></span>
+        </th>
+        <td mat-cell *matCellDef="let r">{{ r.message }}</td>
+      </ng-container>
+
+      <!-- Investor Name -->
+      <ng-container matColumnDef="investorName">
+        <th mat-header-cell *matHeaderCellDef (click)="sort('investorName')" class="sortable">
+          Investor <span [ngClass]="arrow('investorName')"></span>
+        </th>
+        <td mat-cell *matCellDef="let r">{{ r.investorName }}</td>
+      </ng-container>
+
+      <!-- MICRO FINANCER -->
+      <ng-container matColumnDef="microFinancer">
+        <th mat-header-cell *matHeaderCellDef (click)="sort('microFinancerName')" class="sortable">
+          Financer <span [ngClass]="arrow('microFinancerName')"></span>
+        </th>
+        <td mat-cell *matCellDef="let r">{{ r.microFinancerName }}</td>
+      </ng-container>
+
+      <!-- Executive -->
+      <ng-container matColumnDef="brokername">
+        <th mat-header-cell *matHeaderCellDef (click)="sort('brokername')" class="sortable">
+          Executive <span [ngClass]="arrow('brokername')"></span>
+        </th>
+        <td mat-cell *matCellDef="let r">{{ r.brokerName }}</td>
+      </ng-container>
+
+
+      <!-- PRINCIPAL -->
+      <ng-container matColumnDef="principal">
+        <th mat-header-cell *matHeaderCellDef (click)="sort('principal')" class="sortable">
+          Principal <span [ngClass]="arrow('principal')"></span>
+        </th>
+        <td mat-cell *matCellDef="let r">₹{{ r.principal | number:'1.0-0' }}</td>
+      </ng-container>
+
+      <!-- INTEREST TYPE -->
+      <ng-container matColumnDef="interestType">
+        <th mat-header-cell *matHeaderCellDef (click)="sort('interestType')" class="sortable">
+          Type <span [ngClass]="arrow('interestType')"></span>
+        </th>
+
+        <td mat-cell *matCellDef="let r">
+          {{ getInterestTypeLabel(r.interestType) }}
+        </td>
+      </ng-container>
+
+      <!-- INTEREST RATE -->
+      <ng-container matColumnDef="interestRate">
+        <th mat-header-cell *matHeaderCellDef (click)="sort('interestRate')" class="sortable">
+          Rate(%) <span [ngClass]="arrow('interestRate')"></span>
+        </th>
+        <td mat-cell *matCellDef="let r">₹{{ r.interestRate | number:'1.0-0' }}</td>
+      </ng-container>
+
+      <!-- AMOUNT -->
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef (click)="sort('amount')" class="sortable">
+          Interest Amount <span [ngClass]="arrow('amount')"></span>
+        </th>
+        <td mat-cell *matCellDef="let r">₹{{ r.amount | number:'1.0-0' }}</td>
+      </ng-container>
+
+      <!-- STATUS -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef (click)="sort('status')" class="sortable">
+          Status <span [ngClass]="arrow('status')"></span>
+        </th>
+        <td mat-cell *matCellDef="let r">
+          <span class="status-badge" [class.overdue]="r.status === 'Pending' && r.reminderDate < today">
+            {{ r.status }}
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- ACTION -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let r">
+          <button *ngIf="r.status === 'Pending'" mat-raised-button color="accent" (click)="payNow(r)">
+            Pay Now
+          </button>
+          <span *ngIf="r.status === 'Paid'" class="paid-label">✔ Paid</span>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    </table>
+  </div>
+  <!-- PAGINATOR -->
+  <mat-paginator *ngIf="!loading() && reminders().length" [length]="filteredReminders.length" [pageSize]="pageSize"
+    [pageIndex]="pageIndex" [pageSizeOptions]="[5, 10, 20]" (page)="onPageChange($event)">
+  </mat-paginator>
+
+</mat-card>
+<!-- Loader Overlay -->
+<div class="overlay" *ngIf="sorting">
+  <mat-progress-spinner mode="indeterminate" diameter="60"></mat-progress-spinner>
+</div>

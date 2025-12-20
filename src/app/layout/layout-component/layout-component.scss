@@ -1,0 +1,89 @@
+/* =====================================================
+   ENTIRE LAYOUT CONTAINER
+   (Natural layout: header → content → footer)
+===================================================== */
+
+.app-container {
+  display: flex;
+  min-height: 100vh; /* prevents footer from hiding */
+}
+
+/* Main content column */
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+}
+.bell-btn {
+  margin-right: 8px;
+  position: relative;
+  z-index: 1000;
+}
+
+/* =====================================================
+   HEADER TOOLBAR
+===================================================== */
+
+.app-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.app-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* =====================================================
+   MAIN PAGE CONTENT
+===================================================== */
+
+.app-content {
+  flex: 0;  
+  padding: 20px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto; /* centers content */
+}
+
+/* =====================================================
+   FOOTER – follows content closely
+===================================================== */
+
+.app-footer {
+  width: 100%;
+  background: #e0e0e0;
+  padding: 12px;
+  text-align: center;
+  font-size: 13px;
+  border-top: 1px solid #ccc;
+
+  /* MAGIC LINE:
+     Makes footer appear IMMEDIATELY
+     below table/grid or any content. */
+  margin-top: 20px;
+}
+
+/* =====================================================
+   SIDENAV
+===================================================== */
+
+.app-sidenav {
+  width: 250px;
+}
+
+.sidenav-header {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+}

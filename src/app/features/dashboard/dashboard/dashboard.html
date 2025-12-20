@@ -1,0 +1,72 @@
+<div class="dashboard-root">
+
+  <!-- Top KPI cards -->
+  <div class="kpi-grid">
+    <mat-card class="kpi-card kpi-primary">
+      <div class="kpi-label">Total Invested</div>
+      <div class="kpi-value">₹{{ TotalInvested | number:'1.0-0' }}</div>
+    </mat-card>
+
+    <mat-card class="kpi-card kpi-warning">
+      <div class="kpi-label">Outstanding Principal</div>
+      <div class="kpi-value">₹{{ outstandingPrincipal | number:'1.0-0' }}</div>
+    </mat-card>
+
+    <mat-card class="kpi-card kpi-success">
+      <div class="kpi-label">Monthly Return</div>
+      <div class="kpi-value">₹{{ MonthlyReturn | number:'1.0-0' }}</div>
+    </mat-card>
+
+    <mat-card class="kpi-card kpi-neutral">
+      <div class="kpi-label">Active Investors</div>
+      <div class="kpi-value">{{ ActiveInvestors }}</div>
+    </mat-card>
+  </div>
+
+  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+  <div *ngIf="error" class="dashboard-error">{{ error }}</div>
+
+  <!-- Charts row -->
+  <div class="charts-grid" *ngIf="!loading">
+
+    <!-- Monthly Interest Line Chart -->
+    <mat-card class="chart-card">
+      <div class="chart-title">Monthly Interest (₹)</div>
+      <div style="height:220px">
+        <canvas baseChart
+          [data]="monthlyInterestData"
+          [options]="monthlyInterestOptions"
+          [type]="'line'">
+        </canvas>
+      </div>
+    </mat-card>
+
+    <!-- Principal vs Interest Bar Chart -->
+    <mat-card class="chart-card">
+      <div class="chart-title">Principal vs Interest per Investor (₹)</div>
+      <div style="height:220px">
+        <canvas baseChart
+          [data]="portfolioBarData"
+          [options]="portfolioBarOptions"
+          [type]="'bar'">
+        </canvas>
+      </div>
+    </mat-card>
+
+    <!-- Frequency Doughnut Chart -->
+    <mat-card class="chart-card small">
+      <div class="chart-title chart-title-center">
+        Investments by Frequency
+      </div>
+
+      <div class="donut-wrapper">
+        <canvas baseChart
+          [data]="frequencyData"
+          [options]="frequencyOptions"
+          [type]="'doughnut'">
+        </canvas>
+      </div>
+    </mat-card>
+
+  </div>
+</div>

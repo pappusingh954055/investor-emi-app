@@ -1,0 +1,148 @@
+<!-- <mat-card>
+  <mat-card-title>Upcoming EMI Reminders</mat-card-title>
+
+  <mat-progress-bar *ngIf="loading()" mode="indeterminate"></mat-progress-bar>
+
+  <div *ngIf="!loading() && reminders().length === 0" class="empty">
+    🎉 No pending EMI reminders
+  </div>
+
+  <table mat-table [dataSource]="reminders()" *ngIf="reminders().length>0">
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let r">
+        {{ r.reminderDate | date }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="message">
+      <th mat-header-cell *matHeaderCellDef>Message</th>
+      <td mat-cell *matCellDef="let r">{{ r.message }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="investor">
+      <th mat-header-cell *matHeaderCellDef>Investor</th>
+      <td mat-cell *matCellDef="let r">{{ r.investorName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="financer">
+      <th mat-header-cell *matHeaderCellDef>Financer</th>
+      <td mat-cell *matCellDef="let r">{{ r.microFinancerName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="principal">
+      <th mat-header-cell *matHeaderCellDef>Principal</th>
+      <td mat-cell *matCellDef="let r">₹{{ r.principal }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Type</th>
+      <td mat-cell *matCellDef="let r">{{ r.interestType }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="rate">
+      <th mat-header-cell *matHeaderCellDef>Rate %</th>
+      <td mat-cell *matCellDef="let r">{{ r.interestRate }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef>Interest</th>
+      <td mat-cell *matCellDef="let r">₹{{ r.amount }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let r">
+        <span class="badge pending">Pending</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let r">
+        <button mat-raised-button color="primary" (click)="payNow(r)">
+          Pay Now
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</mat-card> -->
+
+
+<mat-card>
+  <mat-card-title>Upcoming EMI Reminders</mat-card-title>
+
+  <mat-progress-bar *ngIf="loading()" mode="indeterminate"></mat-progress-bar>
+
+  <div *ngIf="!loading() && reminders().length === 0" class="empty">
+    🎉 No pending EMI reminders
+  </div>
+
+  <table mat-table [dataSource]="reminders()" *ngIf="reminders().length>0">
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let r">
+        {{ r.reminderDate | date }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="message">
+      <th mat-header-cell *matHeaderCellDef>Message</th>
+      <td mat-cell *matCellDef="let r">{{ r.message }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="investor">
+      <th mat-header-cell *matHeaderCellDef>Investor</th>
+      <td mat-cell *matCellDef="let r">{{ r.investorName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="financer">
+      <th mat-header-cell *matHeaderCellDef>Financer</th>
+      <td mat-cell *matCellDef="let r">{{ r.microFinancerName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="principal">
+      <th mat-header-cell *matHeaderCellDef>Principal</th>
+      <td mat-cell *matCellDef="let r">₹{{ r.principal }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Type</th>
+      <td mat-cell *matCellDef="let r">{{ r.interestType }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="rate">
+      <th mat-header-cell *matHeaderCellDef>Rate %</th>
+      <td mat-cell *matCellDef="let r">{{ r.interestRate }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef>Interest</th>
+      <td mat-cell *matCellDef="let r">₹{{ r.amount }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let r">
+        <span class="badge pending">Pending</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let r">
+        <button mat-raised-button color="primary" *ngIf="r.status === 'Pending'" (click)="payNow(r)">
+          Pay Now
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</mat-card>

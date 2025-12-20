@@ -1,0 +1,108 @@
+<mat-card class="investor-form-card">
+    <mat-card-title>
+        {{ editingId() ? 'Edit Investor' : 'Add New Investor' }}
+    </mat-card-title>
+
+    <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="submit()" class="compact-form">
+            <div class="form-row">
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="name" />
+                    <mat-error *ngIf="form.get('name')?.hasError('required')">
+                        Name is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-row">
+                <mat-form-field appearance="outline" class="half-width">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" />
+                    <mat-error *ngIf="form.get('email')?.hasError('email')">
+                        Invalid email
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="half-width">
+                    <mat-label>Phone</mat-label>
+                    <input matInput formControlName="phone" />
+                </mat-form-field>
+            </div>
+
+            <div class="form-actions">
+                <button mat-raised-button color="primary" type="submit" [disabled]="saving()">
+                    <mat-icon>save</mat-icon>
+                    {{ editingId() ? 'Update' : 'Create' }}
+                </button>
+
+                <button mat-button type="button" (click)="resetForm()" [disabled]="saving()">
+                    <mat-icon>refresh</mat-icon>
+                    Clear
+                </button>
+            </div>
+
+            <mat-progress-bar *ngIf="saving()" mode="indeterminate"></mat-progress-bar>
+        </form>
+    </mat-card-content>
+</mat-card>
+
+<mat-card>
+    <mat-card-title>Investors</mat-card-title>
+
+    <mat-card-content>
+        <mat-progress-bar *ngIf="loading()" mode="indeterminate"></mat-progress-bar>
+        <div class="table-wrapper">
+            <table mat-table [dataSource]="pagedInvestors" class="mat-elevation-z2 full-width">
+
+                <!-- Id -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef>Id</th>
+                    <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+                </ng-container>
+
+                <!-- Name -->
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef>Name</th>
+                    <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+                </ng-container>
+
+                <!-- Email -->
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef>Email</th>
+                    <td mat-cell *matCellDef="let row">{{ row.email }}</td>
+                </ng-container>
+
+                <!-- Phone -->
+                <ng-container matColumnDef="phone">
+                    <th mat-header-cell *matHeaderCellDef>Phone</th>
+                    <td mat-cell *matCellDef="let row">{{ row.phone }}</td>
+                </ng-container>
+
+                <!-- Actions -->
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>Actions</th>
+                    <td mat-cell *matCellDef="let row">
+                        <button mat-icon-button color="primary" (click)="edit(row)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn" (click)="delete(row)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+        </div>
+        <!-- PAGINATION -->
+        <mat-paginator *ngIf="investors().length" [length]="investors().length" [pageSize]="pageSize"
+            [pageIndex]="pageIndex" [pageSizeOptions]="[5, 10, 20]" (page)="onPageChange($event)">
+        </mat-paginator>
+
+        <div *ngIf="!loading() && investors().length === 0" class="empty-state">
+            No investors yet. Use the form above to add one.
+        </div>
+    </mat-card-content>
+</mat-card>

@@ -20,10 +20,7 @@
 /* ===========================
    STATUS + OVERDUE COLORS
 =========================== */
-.overdue {
-  background: #ffebee;
-  color: #d32f2f;
-}
+
 .status-badge {
   padding: 4px 10px;
   border-radius: 12px;
@@ -118,4 +115,25 @@ mat-card {
   overflow-x: hidden;
   padding-right: 4px;
   border-radius: 8px;
+}
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.paid {
+  background: #d4edda;
+  color: #155724;
+}
+
+.overdue {
+  background: #f8d7da;
+  color: #721c24;
 }

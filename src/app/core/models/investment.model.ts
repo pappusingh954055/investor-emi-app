@@ -12,5 +12,6 @@ export interface Investment {
   microFinancerId?: any;
   microFinancerName?: any;
   microFinancerBrokerName?: any;
-  brokerName?: any;             
+  brokerName?: any;   
+  isPaid?: boolean;            
 }

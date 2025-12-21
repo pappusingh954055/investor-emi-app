@@ -1,63 +1,3 @@
-// /* Global card padding & rounded corners */
-// mat-card {
-//   margin-bottom: 16px;
-//   border-radius: 12px !important;
-//   padding: 10px 16px !important;
-// }
-
-// /* Section headings spacing */
-// mat-card-title {
-//   padding-bottom: 6px;
-//   font-weight: 600;
-//   font-size: 16px;
-// }
-
-// /* Select dropdown full width */
-// .full-width {
-//   width: 100%;
-//   margin-top: 6px;
-// }
-
-// /* Remove large empty space between controls */
-// mat-form-field.full-width {
-//   margin-bottom: -4px;
-// }
-
-// /* EMI table spacing */
-// table {
-//   width: 100%;
-//   margin-top: 10px;
-//   border-radius: 10px !important;
-// }
-
-// /* Tab content padding fix */
-// mat-tab-group {
-//   margin-top: -8px;
-// }
-
-// /* Reduce extra blank space above EMI Schedule */
-// .schedule-card {
-//   padding-top: 4px !important;
-// }
-
-// /* Improve tab UI */
-// mat-tab-header {
-//   margin-bottom: 8px;
-// }
-
-// /* Responsive fix */
-// @media (max-width: 768px) {
-//   mat-card {
-//     padding: 10px 10px !important;
-//   }
-// }
-// .export-area {
-//   margin: 6px 0 10px;
-//   display: flex;
-//   gap: 10px;
-// }
-
-
 
 /* Global card padding & rounded corners */
 /* Global card padding & rounded corners */
@@ -321,3 +261,24 @@ th {
   cursor: pointer;
 }
 
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.status-badge.paid {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-badge.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.overdue {
+  background: #fdecea;
+  color: #c62828;
+}

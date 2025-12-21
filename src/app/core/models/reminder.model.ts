@@ -9,8 +9,9 @@ export interface Reminder {
   amount: number;
   isSent: boolean;
   status?: string;  
-  brokername?: string;
+  brokerName?: string;
   microFinancer?: string;
+  microFinancerName?: string;
   principal?: number;
   investorName?: string;
 }

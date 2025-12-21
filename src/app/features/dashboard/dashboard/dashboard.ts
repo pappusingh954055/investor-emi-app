@@ -2,9 +2,11 @@ import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
   Component,
+  inject,
   OnDestroy,
   OnInit,
   QueryList,
+  signal,
   ViewChild,
   ViewChildren
 } from '@angular/core';
@@ -28,6 +30,7 @@ import {
 import { BaseChartDirective } from 'ng2-charts';
 import { MatCardModule } from '@angular/material/card';
 import { DashboardService } from '../../../core/services/dashboard.service';
+import { ReminderService } from '../../../core/services/reminder.service.ts';
 
 Chart.register(
   CategoryScale,
@@ -60,6 +63,10 @@ export class Dashboard implements OnInit, AfterViewInit, OnDestroy {
 
   loading = false;
   error: string | null = null;
+
+  counts = signal<any>({});
+
+  reminderService = inject(ReminderService);
 
   constructor(private dashboardService: DashboardService) { }
 
@@ -209,6 +216,18 @@ export class Dashboard implements OnInit, AfterViewInit, OnDestroy {
         this.error = "Failed to load dashboard";
         this.loading = false;
       }
+    });
+
+    this.loadCounts();
+
+    this.reminderService.onRefresh().subscribe(() => {
+      this.loadCounts();
+    });
+  }
+
+  loadCounts() {
+    this.reminderService.getDashboardCounts().subscribe(res => {
+      this.counts.set(res);
     });
   }
 }

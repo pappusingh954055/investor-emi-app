@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Confirm Payment</h2>
+
+  <mat-dialog-content>
+  <p>
+    Do you want to pay
+    <strong>₹{{ data.amount | number:'1.2-2' }}</strong>
+    for
+    <strong>EMI #{{ data.emiNumber }}</strong>
+    due on
+    <strong>{{ data.reminderDate | date }}</strong>?
+  </p>
+</mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button mat-button (click)="close(false)">Cancel</button>
+      <button mat-raised-button color="primary" (click)="close(true)">
+        Pay
+      </button>
+    </mat-dialog-actions>

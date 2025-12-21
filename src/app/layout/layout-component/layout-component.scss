@@ -1,24 +1,17 @@
 /* =====================================================
    ENTIRE LAYOUT CONTAINER
-   (Natural layout: header → content → footer)
 ===================================================== */
 
 .app-container {
   display: flex;
-  min-height: 100vh; /* prevents footer from hiding */
+  min-height: 100vh;
 }
 
-/* Main content column */
 .main-wrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
   overflow: hidden;
-}
-.bell-btn {
-  margin-right: 8px;
-  position: relative;
-  z-index: 1000;
 }
 
 /* =====================================================
@@ -42,19 +35,75 @@
 }
 
 /* =====================================================
+   🔔 BELL ICON + PERFECT BADGE
+===================================================== */
+
+.bell-animate {
+  position: relative;
+  margin-right: 10px;
+  z-index: 1100;
+}
+
+/* ✅ PERFECT ROUND, SMALL, LEFT-ALIGNED BADGE */
+::ng-deep .mat-badge-content {
+  top: 2px !important;          /* move DOWN */
+  right: 2px !important;        /* move LEFT */
+
+  min-width: 16px !important;
+  height: 16px !important;
+
+  padding: 0 3px !important;    /* supports 2-digit numbers */
+  line-height: 16px !important;
+
+  font-size: 9px !important;
+  font-weight: 600;
+
+  border-radius: 999px !important; /* always round */
+  box-sizing: border-box;
+}
+
+/* =====================================================
+   🔔 BELL ANIMATIONS
+===================================================== */
+
+/* Subtle pulse */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.bell-animate {
+  animation: pulse 1.6s infinite;
+}
+
+/* Shake (used only when new overdue appears) */
+@keyframes shake {
+  0% { transform: rotate(0deg); }
+  20% { transform: rotate(-12deg); }
+  40% { transform: rotate(12deg); }
+  60% { transform: rotate(-8deg); }
+  80% { transform: rotate(8deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.shake {
+  animation: shake 0.7s ease-in-out;
+}
+
+/* =====================================================
    MAIN PAGE CONTENT
 ===================================================== */
 
 .app-content {
-  flex: 0;  
   padding: 20px;
   max-width: 1200px;
   width: 100%;
-  margin: 0 auto; /* centers content */
+  margin: 0 auto;
 }
 
 /* =====================================================
-   FOOTER – follows content closely
+   FOOTER
 ===================================================== */
 
 .app-footer {
@@ -64,10 +113,6 @@
   text-align: center;
   font-size: 13px;
   border-top: 1px solid #ccc;
-
-  /* MAGIC LINE:
-     Makes footer appear IMMEDIATELY
-     below table/grid or any content. */
   margin-top: 20px;
 }
 

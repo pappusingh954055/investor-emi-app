@@ -20,6 +20,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatDialogModule } from '@angular/material/dialog';
+
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
@@ -48,8 +50,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         MatPaginatorModule,
         MatSortModule,
         MatProgressSpinnerModule,
-        MatBadgeModule
-
+        MatBadgeModule,
+        MatDialogModule
     ],
     exports: [
         MatToolbarModule,
@@ -77,7 +79,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         MatPaginatorModule,
         MatSortModule,
         MatProgressSpinnerModule,
-        MatBadgeModule
+        MatBadgeModule,
+        MatDialogModule
     ]
 })
 export class MaterialModule { }

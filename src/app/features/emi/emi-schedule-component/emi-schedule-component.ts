@@ -20,6 +20,7 @@ import { ExportService } from '../../../core/services/export.service';
 
 export class EmiScheduleComponent implements OnInit {
 
+
   private investorService = inject(InvestorService);
   private investmentService = inject(InvestmentService);
   private emiService = inject(EmiService);
@@ -39,6 +40,8 @@ export class EmiScheduleComponent implements OnInit {
   loadingInvestments = signal(false);
   loadingEmi = signal(false);
 
+
+  today: Date = new Date();
   /** --------------------------
    * PAGING VARIABLES
    * -------------------------- */
@@ -57,6 +60,7 @@ export class EmiScheduleComponent implements OnInit {
     'interestRate',
     'interestComponent',
     'remainingPrincipal',
+    'isPaid'
   ];
 
   ngOnInit(): void {
@@ -140,6 +144,25 @@ export class EmiScheduleComponent implements OnInit {
   grandTotal(): number {
     return this.selectedInvestmentPrincipal + this.totalInterest();
   }  
+
+  // --------------------------
+  // STATUS HELPERS
+  // --------------------------
+
+  // isOverdue(e: EmiItem): boolean {
+  //   if (e.isPaid) return false;
+  //   const today = new Date();
+  //   const due = new Date(e.paymentDate);
+  //   today.setHours(0, 0, 0, 0);
+  //   due.setHours(0, 0, 0, 0);
+  //   return due < today;
+  // }
+
+  // getStatusText(e: EmiItem): string {
+  //   if (e.isPaid) return 'Completed';
+  //   if (this.isOverdue(e)) return 'Overdue';
+  //   return 'Pending';
+  // }
 }
 
 

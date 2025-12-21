@@ -32,4 +32,6 @@ export class DashboardService {
   getSummary(): Observable<DashboardSummary> {
     return this.http.get<DashboardSummary>(`${this.baseUrl}/summary`);
   }
+
+
 }

@@ -1,60 +1,71 @@
+<mat-card class="schedule-card">
+  <mat-card-title>All Investors</mat-card-title>
 
+  <mat-card-content>
+    <mat-progress-bar *ngIf="loading()" mode="indeterminate"></mat-progress-bar>
 
-<mat-card>
-    <mat-card-title>All Investors</mat-card-title>
-    <mat-card-content>
-        <mat-progress-bar *ngIf="loading()" mode="indeterminate"></mat-progress-bar>
-        <div class="table-wrapper">
-            <table mat-table [dataSource]="pagedInvestors" class="mat-elevation-z2 full-width">
+    <div class="table-wrapper">
+      <table
+        mat-table
+        [dataSource]="pagedInvestors"
+        class="mat-elevation-z2 full-width emi-table">
 
-                <!-- Id -->
-                <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef>Id</th>
-                    <td mat-cell *matCellDef="let row">{{ row.id }}</td>
-                </ng-container>
+        <!-- Id -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>Id</th>
+          <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+        </ng-container>
 
-                <!-- Name -->
-                <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef>Name</th>
-                    <td mat-cell *matCellDef="let row">{{ row.name }}</td>
-                </ng-container>
+        <!-- Name -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+        </ng-container>
 
-                <!-- Email -->
-                <ng-container matColumnDef="email">
-                    <th mat-header-cell *matHeaderCellDef>Email</th>
-                    <td mat-cell *matCellDef="let row">{{ row.email }}</td>
-                </ng-container>
+        <!-- Email -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>Email</th>
+          <td mat-cell *matCellDef="let row">{{ row.email }}</td>
+        </ng-container>
 
-                <!-- Phone -->
-                <ng-container matColumnDef="phone">
-                    <th mat-header-cell *matHeaderCellDef>Phone</th>
-                    <td mat-cell *matCellDef="let row">{{ row.phone }}</td>
-                </ng-container>
+        <!-- Phone -->
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef>Phone</th>
+          <td mat-cell *matCellDef="let row">{{ row.phone }}</td>
+        </ng-container>
 
-                <!-- Actions -->
-                <ng-container matColumnDef="actions">
-                    <th mat-header-cell *matHeaderCellDef>Actions</th>
-                    <td mat-cell *matCellDef="let row">
-                        <button mat-icon-button color="primary" (click)="edit(row)">
-                            <mat-icon>edit</mat-icon>
-                        </button>
-                        <button mat-icon-button color="warn" (click)="delete(row)">
-                            <mat-icon>delete</mat-icon>
-                        </button>
-                    </td>
-                </ng-container>
+        <!-- Actions -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="action-header">
+            Actions
+          </th>
+          <td mat-cell *matCellDef="let row" class="action-cell">
+            <button mat-icon-button color="primary" (click)="edit(row)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="delete(row)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
 
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-            </table>
-        </div>
-        <!-- PAGINATION -->
-        <mat-paginator *ngIf="investors().length" [length]="investors().length" [pageSize]="pageSize"
-            [pageIndex]="pageIndex" [pageSizeOptions]="[5, 10, 20]" (page)="onPageChange($event)">
-        </mat-paginator>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
 
-        <div *ngIf="!loading() && investors().length === 0" class="empty-state">
-            No investors yet. Use the form above to add one.
-        </div>
-    </mat-card-content>
+    <!-- PAGINATION -->
+    <mat-paginator
+      *ngIf="investors().length"
+      [length]="investors().length"
+      [pageSize]="pageSize"
+      [pageIndex]="pageIndex"
+      [pageSizeOptions]="[5, 10, 20]"
+      (page)="onPageChange($event)">
+    </mat-paginator>
+
+    <div *ngIf="!loading() && investors().length === 0" class="empty-state">
+      No investors yet. Use the form above to add one.
+    </div>
+  </mat-card-content>
 </mat-card>

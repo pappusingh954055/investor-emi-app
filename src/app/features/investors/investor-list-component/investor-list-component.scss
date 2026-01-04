@@ -1,204 +1,88 @@
-.investor-form-card {
-  margin-bottom: 16px;
+/* =========================================
+   GRADIENT STICKY TABLE HEADER (MATCHED)
+========================================= */
+
+.mat-mdc-header-row {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-.investor-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.mat-mdc-header-cell {
+  background: transparent !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  padding: 4px 10px !important;
+  white-space: nowrap;
+  border-bottom: none !important;
+  position: relative;
 }
 
-.form-row {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+/* subtle underline like upcoming-reminder */
+.mat-mdc-header-cell::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.3);
 }
 
-.full-width {
-  flex: 1 1 100%;
-}
+/* =========================================
+   COMPACT ROWS (UNCHANGED)
+========================================= */
 
-.half-width {
-  flex: 1 1 50%;
-  min-width: 220px;
-}
-
-.form-actions {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  margin-top: 8px;
-}
-
-.full-width table {
-  width: 100%;
-}
-
-.empty-state {
-  margin-top: 12px;
-  font-style: italic;
-  color: #777;
-}
-
-/* ========================================================= */
-/* ⭐ RIGHT-ALIGN TITLE WITH TEXTBOXES (Final Fix)            */
-/* ========================================================= */
-
-mat-card-title {
-  padding-left: 12px !important;
-  /* moves title right to match textbox alignment */
-  margin-top: 4px !important;
-  margin-bottom: 12px !important;
-  font-weight: 500;
-}
-
-
-
-
-/* ============================================= */
-/*   COMPACT MATERIAL TABLE – DOES NOT OVERFLOW  */
-/* ============================================= */
-
-/* Reduce table cell padding */
-.mat-mdc-table .mdc-data-table__cell,
-.mat-mdc-table .mdc-data-table__header-cell {
+.mat-mdc-table .mdc-data-table__cell {
   padding: 4px 10px !important;
   height: 36px !important;
   font-size: 13px !important;
 }
 
-/* Reduce header size */
-.mat-mdc-header-cell {
-  font-size: 14px !important;
-  font-weight: 600 !important;
-}
-
-/* Reduce row height */
 .mat-mdc-row,
 .mat-mdc-header-row {
   height: 36px !important;
 }
 
-/* Reduce space above/below table */
-.emi-table {
-  margin-top: 6px !important;
-  margin-bottom: 6px !important;
-}
+/* =========================================
+   TABLE WRAPPER
+========================================= */
 
-/* Keep footer compact */
-.mat-mdc-footer-row {
-  height: 34px !important;
-}
-
-/* Ensure card never overflows screen height */
-.schedule-card {
-  max-height: calc(100vh - 180px) !important;
-  overflow: auto;
-  padding: 10px !important;
-}
-
-/* ================================ */
-/*       SCROLLABLE TABLE AREA      */
-/* ================================ */
 .table-wrapper {
   max-height: 350px;
-  /* adjust height you want */
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 4px;
-  /* avoid scrollbar overlap */
   border-radius: 8px;
 }
 
-/* Prevent table from stretching full viewport */
+/* =========================================
+   TABLE BASE
+========================================= */
+
 .emi-table {
   width: 100%;
   table-layout: fixed !important;
 }
 
+/* =========================================
+   ACTION COLUMN
+========================================= */
 
-
-
-
-/* ================================================
-   SMALLER & CLEANER ANGULAR MATERIAL FORM CONTROLS
-   ================================================ */
-
-/* Reduce mat-form-field height */
-/* ==========================================
-   ULTRA SMALL ANGULAR MATERIAL FORM FIELDS
-   ========================================== */
-
-/* Wrapper height reduced */
-.mat-mdc-form-field {
-  --mdc-shape-medium: 6px;
-  margin-bottom: 4px !important;
+.action-header,
+.action-cell {
+  text-align: center;
+  width: 110px;
 }
 
-/* Reduce overall height of the field */
-.mat-mdc-text-field-wrapper {
-  padding: 0 8px !important;
-  min-height: 34px !important;     /* ↓ from 56px */
-  height: 34px !important;
-}
+/* =========================================
+   CARD HEIGHT CONTROL
+========================================= */
 
-/* Make input text smaller */
-.mdc-text-field__input {
-  font-size: 13px !important;
-  padding: 4px 0 !important;
-  height: 20px !important;
-}
-
-/* Floating label smaller & closer */
-.mat-mdc-floating-label {
-  font-size: 13px !important;
-  top: 14px !important;
-}
-
-/* Reduce red error text spacing & size */
-.mat-mdc-form-field-error {
-  font-size: 11px !important;
-  margin-top: -4px !important;
-}
-
-/* Smaller border thickness */
-.mdc-notched-outline__leading,
-.mdc-notched-outline__notch,
-.mdc-notched-outline__trailing {
-  border-width: 1px !important;
-}
-
-/* Compact mat-select value */
-.mat-mdc-select-value {
-  font-size: 13px !important;
-  padding-top: 2px !important;
-}
-
-.mat-mdc-select-arrow svg {
-  width: 14px !important;
-  height: 14px !important;
-}
-
-/* Smaller buttons */
-button.mat-mdc-raised-button,
-button.mat-mdc-outlined-button {
-  padding: 2px 12px !important;
-  height: 32px !important;
-  min-height: 32px !important;
-  font-size: 13px !important;
-  border-radius: 6px !important;
-}
-
-/* Smaller icon buttons */
-.mat-mdc-icon-button {
-  width: 30px !important;
-  height: 30px !important;
-  padding: 2px !important;
-}
-
-/* Slightly reduce spacing between controls */
-.compact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 4px !important;
+.schedule-card {
+  max-height: calc(100vh - 180px) !important;
+  overflow: auto;
+  padding: 10px !important;
 }

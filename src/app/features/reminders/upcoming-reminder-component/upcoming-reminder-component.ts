@@ -1,5 +1,6 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -11,7 +12,7 @@ import { PayConfirmDialogComponent } from '../../../shared/components/pay-confir
 @Component({
   selector: 'app-upcoming-reminder-component',
   standalone: true,
-  imports: [MaterialModule, CommonModule],
+  imports: [MaterialModule, CommonModule, FormsModule],
   templateUrl: './upcoming-reminder-component.html',
   styleUrl: './upcoming-reminder-component.scss',
 })
@@ -24,6 +25,79 @@ export class UpcomingReminderComponent implements OnInit {
   reminders = signal<Reminder[]>([]);
   loading = signal(false);
   payingId = signal<number | null>(null);
+
+  // Search and Filter
+  searchTerm = signal('');
+  filterType = signal<number | null>(null);
+  sortColumn = signal<string>('date');
+  sortDirection = signal<'asc' | 'desc'>('asc');
+
+  // Pagination
+  pageSize = signal(10);
+  pageIndex = signal(0);
+
+  // Filtered and sorted reminders
+  filteredReminders = computed(() => {
+    let filtered = this.reminders();
+
+    // Search filter
+    if (this.searchTerm()) {
+      const term = this.searchTerm().toLowerCase();
+      filtered = filtered.filter(r =>
+        r.investorName?.toLowerCase().includes(term) ||
+        r.message?.toLowerCase().includes(term) ||
+        r.microFinancerName?.toLowerCase().includes(term)
+      );
+    }
+
+    // Type filter
+    if (this.filterType() !== null) {
+      filtered = filtered.filter(r => r.interestType === this.filterType());
+    }
+
+    // Sort
+    filtered = [...filtered].sort((a, b) => {
+      let aVal: any, bVal: any;
+
+      switch (this.sortColumn()) {
+        case 'date':
+          aVal = new Date(a.reminderDate);
+          bVal = new Date(b.reminderDate);
+          break;
+        case 'investor':
+          aVal = a.investorName || '';
+          bVal = b.investorName || '';
+          break;
+        case 'financer':
+          aVal = a.microFinancerName || '';
+          bVal = b.microFinancerName || '';
+          break;
+        case 'principal':
+          aVal = a.principal;
+          bVal = b.principal;
+          break;
+        case 'amount':
+          aVal = a.amount;
+          bVal = b.amount;
+          break;
+        default:
+          return 0;
+      }
+
+      if (aVal < bVal) return this.sortDirection() === 'asc' ? -1 : 1;
+      if (aVal > bVal) return this.sortDirection() === 'asc' ? 1 : -1;
+      return 0;
+    });
+
+    return filtered;
+  });
+
+  // Paged reminders for display
+  pagedReminders = computed(() => {
+    const start = this.pageIndex() * this.pageSize();
+    const end = start + this.pageSize();
+    return this.filteredReminders().slice(start, end);
+  });
 
   displayedColumns = [
     'date',
@@ -58,6 +132,7 @@ export class UpcomingReminderComponent implements OnInit {
     this.reminderService.getOverdueAndUpcoming().subscribe({
       next: (data: any) => {
         this.reminders.set(data.filter((r: any) => r.status === 'Pending'));
+        this.pageIndex.set(0); // Reset to first page when data loads
         this.loading.set(false);
       },
       error: () => {
@@ -185,5 +260,34 @@ export class UpcomingReminderComponent implements OnInit {
 
       this.snack.open(`Snoozed for ${days} days`, 'Close', { duration: 2000 });
     });
+  }
+
+  /* ===============================
+     SORTING
+  =============================== */
+  sortBy(column: string) {
+    if (this.sortColumn() === column) {
+      this.sortDirection.set(this.sortDirection() === 'asc' ? 'desc' : 'asc');
+    } else {
+      this.sortColumn.set(column);
+      this.sortDirection.set('asc');
+    }
+  }
+
+  /* ===============================
+     FILTERING
+  =============================== */
+  clearFilters() {
+    this.searchTerm.set('');
+    this.filterType.set(null);
+    this.pageIndex.set(0); // Reset to first page
+  }
+
+  /* ===============================
+     PAGINATION
+  =============================== */
+  onPageChange(event: any) {
+    this.pageIndex.set(event.pageIndex);
+    this.pageSize.set(event.pageSize);
   }
 }

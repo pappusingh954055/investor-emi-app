@@ -4,7 +4,10 @@
   <!-- 🔍 SEARCH -->
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Search</mat-label>
-    <input matInput placeholder="Search investor, financer, status..." (keyup)="applySearch($event.target.value)" />
+    <input
+      matInput
+      placeholder="Search investor, financer, status..."
+      (keyup)="applySearch($event.target.value)" />
   </mat-form-field>
 
   <!-- ⏳ LOADING -->
@@ -13,7 +16,10 @@
   <!-- TABLE -->
   <div class="table-wrapper" *ngIf="pagedReminders.length">
 
-    <table mat-table [dataSource]="pagedReminders" class="full-width">
+    <table
+      mat-table
+      [dataSource]="pagedReminders"
+      class="full-width emi-table mat-elevation-z2">
 
       <!-- ID -->
       <ng-container matColumnDef="id">
@@ -109,11 +115,12 @@
           Status <span [ngClass]="arrow('status')"></span>
         </th>
         <td mat-cell *matCellDef="let r">
-          <span class="status-badge" [ngClass]="{
-              'paid': r.status === 'Paid',
-              'overdue': isOverdue(r),
-              'pending': r.status === 'Pending' && !isOverdue(r)
-            }">
+          <span class="status-badge"
+                [ngClass]="{
+                  'paid': r.status === 'Paid',
+                  'overdue': isOverdue(r),
+                  'pending': r.status === 'Pending' && !isOverdue(r)
+                }">
             {{ isOverdue(r) ? 'Overdue' : r.status }}
           </span>
         </td>
@@ -127,8 +134,13 @@
   </div>
 
   <!-- 📄 PAGINATOR -->
-  <mat-paginator *ngIf="filteredReminders.length" [length]="filteredReminders.length" [pageSize]="pageSize"
-    [pageIndex]="pageIndex" [pageSizeOptions]="[5,10,20,30,50,100]" (page)="onPageChange($event)">
+  <mat-paginator
+    *ngIf="filteredReminders.length"
+    [length]="filteredReminders.length"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    [pageSizeOptions]="[5,10,20,30,50,100]"
+    (page)="onPageChange($event)">
   </mat-paginator>
 
 </mat-card>

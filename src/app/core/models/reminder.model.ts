@@ -1,17 +1,18 @@
 export interface Reminder {
   id: number;
   investmentId: number;
-  emiNumber: number;  
+  emiNumber: number;
   investorId?: number;
   emiScheduleItemId: number;    // ✅ NEW FIELD
   reminderDate: string;
   message: string;
   amount: number;
   isSent: boolean;
-  status?: string;  
+  status?: string;
   brokerName?: string;
   microFinancer?: string;
   microFinancerName?: string;
   principal?: number;
   investorName?: string;
+  interestType?: number;
 }

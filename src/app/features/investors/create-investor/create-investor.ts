@@ -1,21 +1,26 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { MaterialModule } from '../../../shared/material.module';
+import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Investor } from '../../../core/models/investor.model';
 import { InvestorService } from '../../../core/services/investor.service.ts';
-import { CommonModule } from '@angular/common';
+import { SuccessDialog } from '../../../shared/components/success-dialog/success-dialog';
+import { ErrorDialog } from '../../../shared/components/error-dialog/error-dialog';
 
 @Component({
-  selector: 'app-investor-list',
+  selector: 'app-create-investor',
   imports: [MaterialModule, CommonModule, ReactiveFormsModule],
-  templateUrl: './investor-list-component.html',
-  styleUrl: './investor-list-component.scss',
+  templateUrl: './create-investor.html',
+  styleUrl: './create-investor.scss',
 })
-export class InvestorListComponent implements OnInit {
+export class CreateInvestor implements OnInit {
+
 
   private fb = inject(FormBuilder);
   private investorService = inject(InvestorService);
+  private dialog = inject(MatDialog);
   private snack = inject(MatSnackBar);
 
   investors = signal<Investor[]>([]);
@@ -53,7 +58,7 @@ export class InvestorListComponent implements OnInit {
       },
       error: () => {
         this.loading.set(false);
-        this.snack.open('Failed to load investors', 'Close', { duration: 3000 });
+        this.dialog.open(ErrorDialog, { data: { message: 'Failed to load investors' } });
       }
     });
   }
@@ -92,12 +97,12 @@ export class InvestorListComponent implements OnInit {
     this.investorService.delete(investor.id).subscribe({
       next: () => {
         this.saving.set(false);
-        this.snack.open('Investor deleted', 'Close', { duration: 2000 });
+        this.dialog.open(SuccessDialog, { data: { message: 'Investor deleted successfully!' } });
         this.loadInvestors();
       },
       error: () => {
         this.saving.set(false);
-        this.snack.open('Delete failed', 'Close', { duration: 3000 });
+        this.dialog.open(ErrorDialog, { data: { message: 'Delete failed' } });
       }
     });
   }
@@ -117,13 +122,13 @@ export class InvestorListComponent implements OnInit {
       this.investorService.create(value as any).subscribe({
         next: () => {
           this.saving.set(false);
-          this.snack.open('Investor created', 'Close', { duration: 2000 });
+          this.dialog.open(SuccessDialog, { data: { message: 'Investor created successfully!' } });
           this.resetForm();
           this.loadInvestors();
         },
         error: () => {
           this.saving.set(false);
-          this.snack.open('Create failed', 'Close', { duration: 3000 });
+          this.dialog.open(ErrorDialog, { data: { message: 'Create failed' } });
         }
       });
     } else {
@@ -131,15 +136,17 @@ export class InvestorListComponent implements OnInit {
       this.investorService.update(id, value as any).subscribe({
         next: () => {
           this.saving.set(false);
-          this.snack.open('Investor updated', 'Close', { duration: 2000 });
+          this.dialog.open(SuccessDialog, { data: { message: 'Investor updated successfully!' } });
           this.resetForm();
           this.loadInvestors();
         },
         error: () => {
           this.saving.set(false);
-          this.snack.open('Update failed', 'Close', { duration: 3000 });
+          this.dialog.open(ErrorDialog, { data: { message: 'Update failed' } });
         }
       });
     }
   }
 }
+
+

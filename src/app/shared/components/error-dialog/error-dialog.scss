@@ -1,0 +1,18 @@
+.error-dialog {
+  text-align: center;
+  padding: 20px;
+
+  h2 {
+    color: #f44336;
+    margin-bottom: 16px;
+  }
+
+  p {
+    font-size: 16px;
+    margin: 0;
+  }
+
+  mat-dialog-actions {
+    margin-top: 20px;
+  }
+}

@@ -6,7 +6,8 @@ export const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path: 'investors', loadComponent: () => import('./features/investors/investor-list-component/investor-list-component').then(m => m.InvestorListComponent) },
+      { path: 'create-investors', loadComponent: () => import('./features/investors/create-investor/create-investor').then(m => m.CreateInvestor) },
+      { path: 'all-investors', loadComponent: () => import('./features/investors/investor-list-component/investor-list-component').then(m => m.InvestorListComponent) },
       { path: 'investor-investments', loadComponent: () => import('./features/investments/investment-list-component/investment-list-component').then(m => m.InvestmentListComponent) },
       { path: 'emi-schedule', loadComponent: () => import('./features/emi/emi-schedule-component/emi-schedule-component').then(m => m.EmiScheduleComponent) },
       { path: 'reminders/reminders-list', loadComponent: () => import('./features/reminders/reminder-list-component/reminder-list-component').then(m => m.ReminderListComponent) },
